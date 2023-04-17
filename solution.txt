@@ -1,0 +1,5 @@
+What is the difference between git restore filename and git restore --staged filename?
+
+
+Ans. git restore filname :- restore the the file to it's conditon
+  git restore --stagged :- it remove the file from stagged area
