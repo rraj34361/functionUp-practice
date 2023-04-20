@@ -1,7 +1,10 @@
 const name = "FunctionUp"
+const mySelf = "Ravi"
 
 const doSomething = function () {
-    console.log('I did something')
+    return 'I did something'
 }
 
 module.exports.name = name
+module.exports.mySelf = mySelf
+module.exports.func = doSomething
