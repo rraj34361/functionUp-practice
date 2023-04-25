@@ -39,6 +39,25 @@ app.get('/sol2',function(req,res) {
 // app.post('sol2',function(req,res){
 //     res.send('your sever is working properly')
 // })
+app.get('/sol2/:id',function(req,res) {
+    const id1 = req.params.id
+    console.log(typeof id1)
+    for(let i =0;i<arr2.length-1;i++){   
+        ele = arr2[i];
+        if(ele!=arr2[i+1]-1){
+
+       return     res.send(`This is not present inside the array ${arr2[i+1]-1}`)
+        }
+
+
+    }
+
+    // res.send('your array is good')
+
+})
+// app.post('sol2',function(req,res){
+//     res.send('your sever is working properly')
+// })
 
 
 

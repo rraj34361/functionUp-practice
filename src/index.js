@@ -1,5 +1,5 @@
 const express = require('express');
-// var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 const first = require('./routes/firstserver')
 
 const route = require('./routes/route.js');
@@ -7,8 +7,8 @@ const assignment = require('./routes/assignment.js')
 
 const app = express();
 
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', route);
 app.use('/solve',assignment)
