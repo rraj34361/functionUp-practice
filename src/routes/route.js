@@ -17,7 +17,7 @@ router.post('/players',function(req,res){
 let details = req.body
 for(let i =0;i<array.length;i++){
 if(array[i].name==details.name){
-    return  res.status(200).send(`This player details already present`)
+    return  res.send(`This player details already present`)
 }
 }
 array.push(details)
