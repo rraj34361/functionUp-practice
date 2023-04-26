@@ -32,13 +32,13 @@ let persons= [
 
 
 router.get('/persons',function(req,res){
-    let age = req.query.age
+    let age = req.query.votingAge
     persons.forEach(ele=>{
         ele.age>=age ? ele.votingStatus=true: ele.votingStatus=false;
     })
   let voting = persons.filter(ele=>ele.votingStatus==true)
 
-    res.send(voting)
+    res.send( {msg: voting} )
 })
 
 
