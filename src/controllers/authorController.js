@@ -28,10 +28,17 @@ const findUpdate = async function(req,res){
 
 const findAuthor = async function(req,res){
     const author_id = await bookModel.find({price : { $gte: 50, $lte:100}}).select({author_id:1,_id:0})
-    console.log(author_id)
-    const author = await authorModel.find({author_id:2})
-    console.log(author)
-    res.send({msg: author})
+    const array = []
+    const arr = author_id.map(obj=>obj.author_id)
+    for(let i =0;i<arr.length;i++){
+        id = arr[i]
+        let author = await authorModel.findOne({author_id:arr[i]}).select({author_name:1,_id:0}) 
+        array.push(author)
+
+    }
+
+
+    res.send({msg: array})
 }
 
 
