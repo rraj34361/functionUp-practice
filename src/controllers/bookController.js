@@ -12,6 +12,13 @@ const createBook = async function (req, res) {
    return    res.send({ error: "you have to give publisherId" });
     }
   } else {
+    if(/[g-z]/.test(book.author)||/[g-z]/.test(book.publisher)){ 
+        if(/[g-z]/.test(book.author)) {
+            return res.send({error:"invalid author_id"})}
+            else{
+                return res.send({error:'invalid publisher_id'})
+            }
+    }
     const validateAuthorId = await authorModel.findById({ _id: book.author });
     const validatePublisherId = await publisherModel.findById({
       _id: book.publisher,
