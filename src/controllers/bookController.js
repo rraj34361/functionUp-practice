@@ -1,23 +1,43 @@
-const authorModel = require("../models/authorModel")
-const bookModel= require("../models/bookModel")
+const authorModel = require("../models/authorModel");
+const bookModel = require("../models/bookModel");
+const publisherModel = require("../models/publisherModel");
 
-const createBook= async function (req, res) {
-    let book = req.body
-    let bookCreated = await bookModel.create(book)
-    res.send({data: bookCreated})
-}
+const createBook = async function (req, res) {
+  let book = req.body;
 
-const getBooksData= async function (req, res) {
-    let books = await bookModel.find()
-    res.send({data: books})
-}
+  if (!book.author || !book.publisher) {
+    if (!book.author) {
+   return    res.send({ error: "you have to give authorId" });
+    } else {
+   return    res.send({ error: "you have to give publisherId" });
+    }
+  } else {
+    const validateAuthorId = await authorModel.findById({ _id: book.author });
+    const validatePublisherId = await publisherModel.findById({
+      _id: book.publisher,
+    });
+    if (!validateAuthorId || !validatePublisherId) {
+      if (!validateAuthorId) {
+       return  res.send({ error: "author is not present" });
+      } else {
+       return res.send({ error: "publisher is not present" });
+      }
+    }
+    let bookCreated = await bookModel.create(book);
+    return res.send({ data: bookCreated });
+  }
+};
+
+const getBooksData = async function (req, res) {
+  let books = await bookModel.find();
+  res.send({ data: books });
+};
 
 const getBooksWithAuthorDetails = async function (req, res) {
-    let specificBook = await bookModel.find().populate('author_id')
-    res.send({data: specificBook})
+  let specificBook = await bookModel.find().populate("author").populate("publisher");
+  res.send({ data: specificBook });
+};
 
-}
-
-module.exports.createBook= createBook
-module.exports.getBooksData= getBooksData
-module.exports.getBooksWithAuthorDetails = getBooksWithAuthorDetails
+module.exports.createBook = createBook;
+module.exports.getBooksData = getBooksData;
+module.exports.getBooksWithAuthorDetails = getBooksWithAuthorDetails;
