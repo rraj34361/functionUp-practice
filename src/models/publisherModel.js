@@ -1,7 +1,7 @@
-const { default: mongoose } = require('mongoose');
-const moongose = require('mongoose');
+const mongoose = require('mongoose');
+// const {newE,isHard,upd,ratting} = requiure('../../newbookM.js')
 
-const publisherSchema = new moongose.Schema({
+const publisherSchema = new mongoose.Schema({
    name: String,
    headQuarter: String
 
