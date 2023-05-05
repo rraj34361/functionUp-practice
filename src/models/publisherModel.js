@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bookModel = require('./bookModel');
 // const {newE,isHard,upd,ratting} = requiure('../../newbookM.js')
 
 const publisherSchema = new mongoose.Schema({
@@ -10,6 +11,7 @@ const publisherSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('LibraryPublisher',publisherSchema)
 
+// const publisherSchema = new mongoose.Schema({
 
 
 

@@ -36,7 +36,9 @@ const createBook = async function (req, res) {
 };
 
 const getBooksData = async function (req, res) {
-  let books = await bookModel.find();
+  pageNo = req.query.page
+  let books = await bookModel.find().skip(3*(pageNo-1)).limit(3);
+  // console.log(books); 
   res.send({ data: books });
 };
 
