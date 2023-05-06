@@ -77,3 +77,24 @@ For free app user, we dont check user's balance and create the order with 0 amou
 
 
 
+
+
+
+Assignments list for today’s assessment 
+ 
+Mongo Day1 Assignment -
+
+https://docs.google.com/document/d/1ENP1i_wdh5IZvVnD2WAzl6F50P8dEPD94t1nCNLi2Oo/edit
+
+Mongo Day2 Assignment -
+
+https://docs.google.com/document/d/180bOChuWfu7wHvtM0I0w_m7SYWENFSYctCHwXu9Z-AY/edit?usp=sharing
+ 
+
+Mongo Day3 Assignment - 
+
+https://docs.google.com/document/d/1ypIh7p62bI_L_xpWHeD4WkEGwcGZJBVC7eSIcj9cMnA/ 
+
+Reference and populate - 
+
+https://docs.google.com/document/d/1J9bLPYBb_wJ3McS5VnHhUgwFwDEg6zzOiGjxHKjjcrI/edit
