@@ -1,5 +1,35 @@
-const { type } = require("express/lib/response")
+
+const userModel = require("../models/userModel")
 const UserModel= require("../models/userModel")
+
+
+const createUser = async function(req,res){
+    data = req.body
+    console.log(data)
+    user = await userModel.create(data)
+
+
+    res.send({msg: user})
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -44,12 +74,6 @@ const basicCode= async function(req, res) {
 
 
 
-const createUser= async function (req, res) {
-    let data= req.body
-    let savedData= await UserModel.create(data)
-    res.send({msg: savedData})
-}
-
 const getUsersData= async function (req, res) {
     let allUsers= await UserModel.find()
     res.send({msg: allUsers})
@@ -57,4 +81,3 @@ const getUsersData= async function (req, res) {
 
 module.exports.createUser= createUser
 module.exports.getUsersData= getUsersData
-module.exports.basicCode= basicCode

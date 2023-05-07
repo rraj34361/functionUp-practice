@@ -1,48 +1,61 @@
+const { default: mongoose } = require("mongoose")
+const userModel = require("../models/userModel")
+const productModel = require('../models/productModel')
 
-const mid1= function ( req, res, next) {
-    req.falana= "hi there. i am adding something new to the req object"
-    console.log("Hi I am a middleware named Mid1")
+
+const isValid= function ( req, res, next) {
+    const head = req.headers.isfreeappuser
+    if(!head){
+        res.send({error: "you are missing a mandatory header"})
+    }
+   else{
+    // console.log(head)
+    req.body.isFreeAppUser = head
+    next()
+   }
+}
+
+const validIds= function ( req, res, next) {
+    const product = req.body.productId 
+    const user = req.body.userId
+if(!mongoose.isValidObjectId(product)){
+    res.send({error:"invalid product id"})
+}
+else if(!mongoose.isValidObjectId(user)){
+      
+    res.send({error:"invalid user id"})
+}
+else{
     next()
 }
 
-const mid2= function ( req, res, next) {
-    console.log("Hi I am a middleware named Mid2")
-    next()
 }
 
-const mid3= function ( req, res, next) {
-    console.log("Hi I am a middleware named Mid3")
-    next()
+const exist = async function (req, res, next){
+    const product = req.body.productId
+    const user = req.body.userId
+    const userExist =  await userModel.findById(user)
+    const productExist =  await productModel.findById(product)
+    if(!userExist||!productExist){
+        if(!userExist){
+            res.send({error:"user with this Id doesn't exist"})
+        }
+        else{
+            res.send({error : "product with this Id doesn't exist"})
+        }
+    }
+    else{
+        next()
+    }
+
 }
 
-const mid4= function ( req, res, next) {
-    console.log("Hi I am a middleware named Mid4")
-    next()
-}
 
-const abc = function(req, res, next) {
-    //get the users IP
-    //save it in db
-    // console log
-    next()
-}
 
-const def = function(req, res, next) {
-   //get the users IP
-   //save it in db
-   // console log
-   next()
-}
 
-const xyz = function(req, res, next) {
-   //get the users IP
-   //save it in db
-   // console log
-   next()
-}
+module.exports.isValid= isValid
+module.exports.validIds = validIds
 
-module.exports.mid1= mid1
-module.exports.mid2= mid2
-module.exports.mid3= mid3
-module.exports.mid4= mid4
-module.exports.abc = abc
+module.exports.exist = exist
+
+
