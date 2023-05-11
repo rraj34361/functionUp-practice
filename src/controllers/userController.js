@@ -27,7 +27,7 @@ const login = async function(req,res){
        "its-a-secret-code"
        );
        res.setHeader("x-auth-token",token);
-       res.send({status:true, token : token})         
+       res.status(200).send({status:true, token : token})         
 }
 
        
@@ -36,9 +36,9 @@ const login = async function(req,res){
         let userId = req.params.userId;
         const userDetails = await userModel.findById(userId);
     
-        if(!userDetails) return res.send({status:false, msg: "No such user exists"});
+        if(!userDetails) return res.status(404).send({status:false, msg: "No such user exists"});
 
-        res.send({status : true, data : userDetails})
+        res.status(200).send({status : true, data : userDetails})
       }
 
 
@@ -65,9 +65,24 @@ const login = async function(req,res){
         res.send({status:true, msg: "user deleted successfully"})
     }
 
+
+
+    const postMessage = async function(req,res){
+           id = req.params.userId
+             const msg = req.body.message
+           const user = await userModel.findById(id)
+          const updatedPost = user.post
+      
+                updatedPost.push(msg)
+         const   updatedUser = await userModel.findByIdAndUpdate(id,{$set : {post : updatedPost}},{new : true})
+
+         res.status(201).send({status : true, user : updatedUser})
+    }
+
 module.exports.users = users
 module.exports.login = login
 module.exports.getUserData = getUserData
 module.exports.fetchUser = fetchUser
 module.exports.update = update
 module.exports.deleting = deleting
+module.exports.postMessage = postMessage

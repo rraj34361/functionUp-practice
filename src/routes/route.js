@@ -1,6 +1,6 @@
 const express = require('express')
 const userController = require('../controllers/userController')
-const  common = require('../models/middleware/auth')
+const  common = require('../middleware/auth')
 
 
 const route = express.Router()
@@ -27,6 +27,8 @@ route.put('/users/:userId', common.isValid, userController.update)
 
 route.delete('/users/:userId', common.isValid, userController.deleting)
 
+
+route.post('/users/:userId/post', common.isValid, userController.postMessage)
 
 
 module.exports = route

@@ -7,11 +7,10 @@ const isValid = function(req,res,next){
     try{
     if(!token) return res.send({status: false, error:"access token is not present"})
     decodedToken = jwt.verify(token, "its-a-secret-code")
-    
-    if(!decodedToken) return res.send({status: false , error : "token is invalid"})
-
+    // if(!decodedToken) return res.send({status: false , error : "token is invalid"})
+    if(decodedToken.userId!=req.params.userId) return res.status(400).send({status: false })
     next()
 
-}catch(e){res.send({error : `token is invalid`})}}
+}catch(error){res.send({error : error})}}
 
 module.exports.isValid = isValid
